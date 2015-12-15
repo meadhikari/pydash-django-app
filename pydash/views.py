@@ -57,8 +57,11 @@ def index(request):
     Index page.
 
     """
-    pydash_urls = get_pydash_urls()
-    return render_to_response('main.html', {'time_refresh': TIME_JS_REFRESH,
+    if not request.user.is_superuser:
+        return HttpResponse('404 Information not found')
+    else:
+        pydash_urls = get_pydash_urls()
+        return render_to_response('main.html', {'time_refresh': TIME_JS_REFRESH,
                                             'time_refresh_long': TIME_JS_REFRESH_LONG,
                                             'time_refresh_net': TIME_JS_REFRESH_NET,
                                             'version': _VERSION,
