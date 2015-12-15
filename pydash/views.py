@@ -57,7 +57,7 @@ def index(request):
     Index page.
 
     """
-    if not request.user.is_superuser:
+    if not request.user.is_staff:
         return HttpResponse('404 Information not found')
     else:
         pydash_urls = get_pydash_urls()
